@@ -1,0 +1,101 @@
+package com.captechconsulting.webservice.adapter;
+
+import org.apache.commons.lang3.StringUtils;
+import org.springframework.ws.transport.http.WsdlDefinitionHandlerAdapter;
+
+import javax.servlet.http.HttpServletRequest;
+
+public class ConfigurableWsdlDefinitionHandlerAdapter extends WsdlDefinitionHandlerAdapter {
+
+    private String scheme;
+    private String serverName;
+    private int serverPort;
+    private String contextPath;
+
+    @Override
+    protected String transformLocation(String location, HttpServletRequest request) {
+
+        final String schemeDivider = "://";
+
+        StringBuilder url = new StringBuilder(getFinalScheme(request));
+        url.append(schemeDivider).append(getFinalServerName(request)).append(':').append(getFinalServerPort(request));
+        if (location.startsWith("/")) {
+            // a relative path, prepend the context path
+            url.append(getFinalContextPath(request)).append(location);
+            return url.toString();
+        } else {
+            int idx = location.indexOf(schemeDivider);
+            if (idx != -1) {
+                // a full url
+                idx = location.indexOf('/', idx + 3);
+                if (idx != -1) {
+                    String path = location.substring(idx);
+                    url.append(path);
+                    return url.toString();
+                }
+            }
+        }
+        // unknown location, return the original
+        return location;
+    }
+
+    private String getFinalContextPath(HttpServletRequest request) {
+        if (StringUtils.isNotBlank(getContextPath())) {
+            return getContextPath();
+        }
+        return request.getContextPath();
+    }
+
+    private int getFinalServerPort(HttpServletRequest request) {
+        if (getServerPort() != 0) {
+            return getServerPort();
+        }
+        return request.getServerPort();
+    }
+
+    private String getFinalServerName(HttpServletRequest request) {
+        if (StringUtils.isNotBlank(getServerName())) {
+            return getServerName();
+        }
+        return request.getServerName();
+    }
+
+    private String getFinalScheme(HttpServletRequest request) {
+        if (StringUtils.isNotBlank(getScheme())) {
+            return getScheme();
+        }
+        return request.getScheme();
+    }
+
+    public String getScheme() {
+        return scheme;
+    }
+
+    public void setScheme(String scheme) {
+        this.scheme = scheme;
+    }
+
+    public String getServerName() {
+        return serverName;
+    }
+
+    public void setServerName(String serverName) {
+        this.serverName = serverName;
+    }
+
+    public int getServerPort() {
+        return serverPort;
+    }
+
+    public void setServerPort(int serverPort) {
+        this.serverPort = serverPort;
+    }
+
+    public String getContextPath() {
+        return contextPath;
+    }
+
+    public void setContextPath(String contextPath) {
+        this.contextPath = contextPath;
+    }
+}
