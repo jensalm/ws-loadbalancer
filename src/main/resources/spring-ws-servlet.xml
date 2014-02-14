@@ -8,16 +8,23 @@
                       http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-3.1.xsd">
 
     <tx:annotation-driven/>
-    <aop:aspectj-autoproxy/>
 
     <bean id="messageFactory" class="org.springframework.ws.soap.saaj.SaajSoapMessageFactory"/>
+
+    <bean id="marshaller" class="org.springframework.oxm.jaxb.Jaxb2Marshaller">
+        <property name="packagesToScan">
+            <list>
+                <value>com.captechconsulting.generated.special</value>
+            </list>
+        </property>
+        <property name="mtomEnabled" value="true"/>
+    </bean>
 
     <beans profile="local, dev">
         <context:property-placeholder ignore-resource-not-found="true" />
         <import resource="spring-wsdl-dynamic.xml"/>
     </beans>
 
-    <!-- TODO: Needs additional profiles set up since these will all use config-prod.properties values now -->
     <beans profile="test">
         <context:property-placeholder location="classpath:config-test.properties"/>
         <import resource="spring-wsdl-static.xml"/>
