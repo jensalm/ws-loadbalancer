@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema elementFormDefault="qualified"
+    xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:schema-base="http://captechconsulting.com/xmlschema/package"
+    targetNamespace="http://captechconsulting.com/xmlschema/package">
+    <xs:element name="PackageRequest">
+        <xs:complexType>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="PackageResponse">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="lcoations" minOccurs="0" maxOccurs="1">
+                    <xs:complexType>
+                        <xs:sequence>
+                            <xs:element name="location" maxOccurs="unbounded" minOccurs="0">
+                            </xs:element>
+                        </xs:sequence>
+                    </xs:complexType>
+                </xs:element>
+                <xs:element name="success" minOccurs="1" maxOccurs="1" type="xs:boolean" />
+                <xs:element name="error" minOccurs="0" maxOccurs="1"  type="schema-base:error" />
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+    <xs:complexType name="error">
+        <xs:sequence>
+            <xs:element minOccurs="1" maxOccurs="1" name="code" type="xs:int" />
+            <xs:element minOccurs="1" maxOccurs="1" name="message" type="xs:string" />
+        </xs:sequence>
+    </xs:complexType>
+</xs:schema>
