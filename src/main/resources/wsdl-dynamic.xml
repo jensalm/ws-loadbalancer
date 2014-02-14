@@ -6,7 +6,7 @@
                       http://www.springframework.org/schema/web-services http://www.springframework.org/schema/web-services/web-services-2.0.xsd
                       http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
 
-    <context:component-scan base-package="com.bofa.p3d.webservice"/>
+    <context:component-scan base-package="com.captechconsulting.webservice"/>
 
     <sws:annotation-driven marshaller="marshaller" unmarshaller="marshaller"/>
 
