@@ -11,11 +11,10 @@
     <sws:annotation-driven />
 
     <sws:dynamic-wsdl id="package" portTypeName="Package"
-                      locationUri="/services/special/"
-                      serviceName="PackageService"
-                      createSoap11Binding="true" createSoap12Binding="true"
+                      locationUri="/services/package/" serviceName="PackageService"
+                      createSoap11Binding="true" createSoap12Binding="false"
                       targetNamespace="http://captechconsulting.com/xmlschema/package">
-        <sws:xsd location="classpath:schema/Package.xsd"/>
+        <sws:xsd location="classpath:/schema/package.xsd"/>
     </sws:dynamic-wsdl>
 
 </beans>
