@@ -8,14 +8,14 @@
 
     <context:component-scan base-package="com.captechconsulting.webservice"/>
 
-    <sws:annotation-driven marshaller="marshaller" unmarshaller="marshaller"/>
+    <sws:annotation-driven />
 
-    <sws:dynamic-wsdl id="special" portTypeName="SpecialService"
+    <sws:dynamic-wsdl id="package" portTypeName="Package"
                       locationUri="/services/special/"
-                      serviceName="SpecialService"
+                      serviceName="PackageService"
                       createSoap11Binding="true" createSoap12Binding="true"
-                      targetNamespace="http://captechconsulting.com/xmlschema/special">
-        <sws:xsd location="classpath:schema/Special.xsd"/>
+                      targetNamespace="http://captechconsulting.com/xmlschema/package">
+        <sws:xsd location="classpath:schema/Package.xsd"/>
     </sws:dynamic-wsdl>
 
 </beans>

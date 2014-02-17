@@ -4,20 +4,29 @@
     targetNamespace="http://captechconsulting.com/xmlschema/package">
     <xs:element name="PackageRequest">
         <xs:complexType>
+            <xs:sequence>
+                <xs:element name="packageId" type="xs:long"/>
+            </xs:sequence>
         </xs:complexType>
     </xs:element>
     <xs:element name="PackageResponse">
         <xs:complexType>
             <xs:sequence>
-                <xs:element name="lcoations" minOccurs="0" maxOccurs="1">
+                <xs:element name="locations" minOccurs="0" maxOccurs="1">
                     <xs:complexType>
                         <xs:sequence>
                             <xs:element name="location" maxOccurs="unbounded" minOccurs="0">
+                                <xs:complexType>
+                                    <xs:sequence>
+                                        <xs:element name="locationId" type="xs:long"/>
+                                        <xs:element name="date" type="xs:dateTime"/>
+                                        <xs:element name="origin" type="xs:boolean"/>
+                                    </xs:sequence>
+                                </xs:complexType>
                             </xs:element>
                         </xs:sequence>
                     </xs:complexType>
                 </xs:element>
-                <xs:element name="success" minOccurs="1" maxOccurs="1" type="xs:boolean" />
                 <xs:element name="error" minOccurs="0" maxOccurs="1"  type="schema-base:error" />
             </xs:sequence>
         </xs:complexType>
