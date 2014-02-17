@@ -12,7 +12,11 @@ public class ConfigurableWsdlDefinitionHandlerAdapter extends WsdlDefinitionHand
     protected String transformLocation(String location, HttpServletRequest request) {
 
         StringBuilder url = new StringBuilder(endpointUrl);
-        url.append(request).append(location);
+        if (location.startsWith("/") && endpointUrl.endsWith("/")) {
+            url.append(location.substring(1));
+        } else {
+            url.append(location);
+        }
         return url.toString();
     }
 
