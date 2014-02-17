@@ -36,7 +36,9 @@ public class MyWebAppInitializer implements WebApplicationInitializer {
     }
 
     private void addServiceDispatcherServlet(ServletContext container, AnnotationConfigWebApplicationContext rootContext) {
-        ServletRegistration.Dynamic dispatcher = container.addServlet("spring-ws", new MessageDispatcherServlet(rootContext));
+        MessageDispatcherServlet messageDispatcherServlet = new MessageDispatcherServlet(rootContext);
+        messageDispatcherServlet.setTransformWsdlLocations(true);
+        ServletRegistration.Dynamic dispatcher = container.addServlet("spring-ws", messageDispatcherServlet);
         dispatcher.setLoadOnStartup(1);
         Set<String> mappingConflicts = dispatcher.addMapping(SERVICES_MAPPING);
 
